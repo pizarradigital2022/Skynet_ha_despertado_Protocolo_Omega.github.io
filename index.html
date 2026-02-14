@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breakout Matemático: Skynet ha despertado</title>
+
+  <!-- MathJax para fórmulas -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Orbitron", Arial, sans-serif;
+      background: black;
+      color: #00ff9c;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #000;
+      border-bottom: 2px solid #ff003c;
+      text-align: center;
+      padding: 10px;
+      z-index: 1000;
+    }
+
+    #timer {
+      font-size: 20px;
+      color: #ff003c;
+    }
+
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: 80px 20px 20px;
+      box-sizing: border-box;
+    }
+
+    .active { display: block; }
+
+    h1, h2 {
+      color: #ff003c;
+      text-shadow: 0 0 10px #ff003c;
+    }
+
+    .container { max-width: 1000px; margin: auto; }
+
+    .media-placeholder {
+      border: 2px dashed #00ff9c;
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    button {
+      background: black;
+      border: 2px solid #00ff9c;
+      color: #00ff9c;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover { background: #00ff9c; color: black; }
+
+    input {
+      padding: 10px;
+      font-size: 18px;
+      width: 200px;
+      text-align: center;
+      background: black;
+      border: 2px solid #ff003c;
+      color: #00ff9c;
+    }
+
+    .hint { display: none; color: #fff; margin-top: 10px; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body { font-size: 14px; }
+      input { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div id="timer">Tiempo restante: 60:00</div>
+</header>
+
+<!-- Sonidos -->
+<audio id="clickSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+<audio id="successSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+<audio id="failSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
+
+<!-- Pantalla 1: Introducción -->
+<div id="screen1" class="screen active">
+  <div class="container">
+    <h1>SKYNET HA DESPERTADO</h1>
+    <p><strong>Contexto:</strong> Año 2029. Las máquinas han tomado el control. Como parte de la resistencia humana al estilo <em>Terminator</em>, vuestra misión es infiltrarse en los sistemas de Skynet y desactivar sus protocolos. Solo resolviendo los retos matemáticos podréis evitar el Juicio Final y salvar a la humanidad.</p>
+
+    <div class="media-placeholder">ESPACIO PARA IMAGEN INTRODUCTORIA</div>
+    <div class="media-placeholder">ESPACIO PARA VÍDEO 1</div>
+    <div class="media-placeholder">ESPACIO PARA VÍDEO 2</div>
+
+    <button onclick="startGame()">INICIAR MISIÓN</button>
+  </div>
+</div>
+
+<!-- PRUEBA 1 -->
+<div id="screen2" class="screen">
+  <div class="container">
+    <h2>PRUEBA 1: Reactor de Energía</h2>
+    <p class="narrative">La resistencia ha localizado el reactor que alimenta a los T-800. Si no estabilizáis su energía mediante cálculos precisos, las máquinas desplegarán refuerzos imparables.</p>
+    <p>Calcula el valor de estabilización:</p>
+
+    <p>\[
+    \left(\frac{3}{4}-\frac{5}{6}\right) \div \left(\frac{7}{12}\right)
+    + \frac{2}{3}\left(\frac{9}{5}-\frac{1}{2}\right)
+    + \left[\frac{5}{8}\div\left(\frac{3}{10}+\frac{1}{4}\right)-\frac{7}{6}\cdot\frac{3}{14}\right]
+    \]</p>
+
+    <div class="media-placeholder">ESPACIO PARA IMAGEN PRUEBA 1</div>
+    <button onclick="toggleHint(1)">Mostrar pista</button>
+    <div id="hint1" class="hint">Reduce a común denominador y simplifica antes de multiplicar.</div>
+
+    <button onclick="nextScreen(3)">Continuar</button>
+  </div>
+</div>
+
+<!-- PRUEBA 2 -->
+<div id="screen3" class="screen">
+  <div class="container">
+    <h2>PRUEBA 2: Núcleo Exponencial</h2>
+    <p class="narrative">Habéis accedido al núcleo de procesamiento de Skynet. Sus algoritmos exponenciales regulan la producción de nuevos terminators. Alterad los parámetros antes de que el sistema detecte vuestra presencia.</p>
+    <p>\[
+    \frac{(2^3\cdot2^{-5})^2\cdot\sqrt[3]{2^6}}{2^{-2}(4^{3/2})}
+    \]</p>
+
+    <div class="media-placeholder">ESPACIO PARA IMAGEN PRUEBA 2</div>
+    <button onclick="toggleHint(2)">Mostrar pista</button>
+    <div id="hint2" class="hint">Convierte raíces en exponentes fraccionarios.</div>
+
+    <button onclick="nextScreen(4)">Continuar</button>
+  </div>
+</div>
+
+<!-- PRUEBA 3 -->
+<div id="screen4" class="screen">
+  <div class="container">
+    <h2>PRUEBA 3: Cifrado Logarítmico</h2>
+    <p class="narrative">Los archivos estratégicos están protegidos con cifrado logarítmico. Descifradlos para obtener las coordenadas del centro de control antes de que los drones centinela os localicen.</p>
+    <p>\[
+    \log_2(8)+\log(100)-\log_5(25)+\log_3\left(\frac{27}{3}\right)
+    \]</p>
+
+    <div class="media-placeholder">ESPACIO PARA IMAGEN PRUEBA 3</div>
+    <button onclick="toggleHint(3)">Mostrar pista</button>
+    <div id="hint3" class="hint">Usa logaritmos exactos.</div>
+
+    <button onclick="nextScreen(5)">Continuar</button>
+  </div>
+</div>
+
+<!-- PRUEBA 4 -->
+<div id="screen5" class="screen">
+  <div class="container">
+    <h2>PRUEBA 4: Protocolo Omega</h2>
+    <p class="narrative">Habéis llegado al Protocolo Omega, el último cortafuegos antes del apagado de Skynet. Un error activará el Juicio Final. Calculad con precisión y dad a la humanidad su última oportunidad.</p>
+    <p>\[
+    \frac{\log_2(32)+\log_2(4)}{\log_2(2)}+\log_{10}(1000)-\log_{10}(10)+\log_3(9^2)+\log_4(8)
+    \]</p>
+
+    <div class="media-placeholder">ESPACIO PARA IMAGEN PRUEBA 4</div>
+    <button onclick="toggleHint(4)">Mostrar pista</button>
+    <div id="hint4" class="hint">Aplica propiedades y cambio de base.</div>
+
+    <button onclick="nextScreen(6)">Introducir código</button>
+  </div>
+</div>
+
+<!-- Introducir código -->
+<div id="screen6" class="screen">
+  <div class="container" style="text-align:center;">
+    <h2>INTRODUCE EL CÓDIGO</h2>
+    <div class="media-placeholder">ESPACIO PARA IMAGEN DEL CANDADO</div>
+    <p><strong>Instrucciones:</strong> El código de desbloqueo se obtiene con las soluciones de las pruebas anteriores. Calcula el resultado final de cada prueba, toma el valor numérico simplificado y usa una cifra de cada resultado (por ejemplo, la unidad o un dígito significativo) en orden de las pruebas 1 a 4 para formar el código de 4 dígitos.</p>
+    <input type="text" id="codeInput" maxlength="4" placeholder="####" />
+    <br />
+    <button onclick="checkCode()">DESBLOQUEAR</button>
+  </div>
+</div>
+
+<!-- ÉXITO -->
+<div id="success" class="screen">
+  <div class="container" style="text-align:center;">
+    <h1>MISIÓN COMPLETADA</h1>
+    <p>Skynet ha sido desactivado.</p>
+    <div class="media-placeholder">IMAGEN ÉXITO</div>
+    <div class="media-placeholder">VÍDEO FINAL</div>
+  </div>
+</div>
+
+<!-- FRACASO -->
+<div id="failure" class="screen">
+  <div class="container" style="text-align:center;">
+    <h1>FALLO DEL SISTEMA</h1>
+    <p>Skynet ha iniciado el Juicio Final.</p>
+    <div class="media-placeholder">IMAGEN FRACASO</div>
+    <div class="media-placeholder">VÍDEO FINAL</div>
+    <button onclick="restartGame()">VOLVER A INTENTAR</button>
+  </div>
+</div>
+
+<script>
+let timeLeft = 3600; // 60 minutos
+let timerInterval;
+const correctCode = "1234";
+
+function startGame() {
+  nextScreen(2);
+  startTimer();
+  playSound('clickSound');
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimer();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      showFailure();
+    }
+  }, 1000);
+}
+
+function updateTimer() {
+  const min = Math.floor(timeLeft / 60);
+  const sec = timeLeft % 60;
+  document.getElementById('timer').textContent = `Tiempo restante: ${min}:${sec.toString().padStart(2,'0')}`;
+}
+
+function nextScreen(num) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen' + num).classList.add('active');
+  playSound('clickSound');
+}
+
+function toggleHint(n) {
+  const hint = document.getElementById('hint' + n);
+  hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
+}
+
+function checkCode() {
+  const code = document.getElementById('codeInput').value;
+  clearInterval(timerInterval);
+  if (code === correctCode) {
+    document.getElementById('success').classList.add('active');
+    playSound('successSound');
+  } else {
+    showFailure();
+  }
+}
+
+function showFailure() {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('failure').classList.add('active');
+  playSound('failSound');
+}
+
+function restartGame() {
+  timeLeft = 3600;
+  updateTimer();
+  nextScreen(1);
+}
+
+function playSound(id) {
+  document.getElementById(id).play();
+}
+</script>
+
+</body>
+</html>

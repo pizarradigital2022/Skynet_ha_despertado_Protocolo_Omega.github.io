@@ -128,7 +128,7 @@
     + \left[\frac{5}{8}\div\left(\frac{3}{10}+\frac{1}{4}\right)-\frac{7}{6}\cdot\frac{3}{14}\right]
     \]</p>
 
-    <div class="media-placeholder"><img src="./resources/prueba_1.png" alt="Prueba 1" width="975"></div>
+    <div class="media-placeholder"><img src="./resources/prueba_1.png" alt="Prueba 1" width="950"></div>
     <button onclick="toggleHint(1)">Mostrar pista</button>
     <div id="hint1" class="hint">Reduce a común denominador y simplifica antes de multiplicar.</div>
 
@@ -145,7 +145,7 @@
     \frac{(2^3\cdot2^{-5})^2\cdot\sqrt[3]{2^6}}{2^{-2}(4^{3/2})}
     \]</p>
 
-    <div class="media-placeholder"><img src="./resources/prueba_2.png" alt="Prueba 2" width="975"></div>
+    <div class="media-placeholder"><img src="./resources/prueba_2.png" alt="Prueba 2" width="950"></div>
     <button onclick="toggleHint(2)">Mostrar pista</button>
     <div id="hint2" class="hint">Convierte raíces en exponentes fraccionarios.</div>
 
@@ -162,7 +162,7 @@
     \log_2(8)+\log(100)-\log_5(25)+\log_3\left(\frac{27}{3}\right)
     \]</p>
 
-    <div class="media-placeholder"><img src="./resources/prueba_3.png" alt="Prueba 3" width="995"></div>
+    <div class="media-placeholder"><img src="./resources/prueba_3.png" alt="Prueba 3" width="950"></div>
     <button onclick="toggleHint(3)">Mostrar pista</button>
     <div id="hint3" class="hint">Usa logaritmos exactos.</div>
 
@@ -179,7 +179,7 @@
     \frac{\log_2(32)+\log_2(4)}{\log_2(2)}+\log_{10}(1000)-\log_{10}(10)+\log_3(9^2)+\log_4(8)
     \]</p>
 
-    <div class="media-placeholder"><img src="./resources/prueba_4.png" alt="Prueba 4" width="975"></div>
+    <div class="media-placeholder"><img src="./resources/prueba_4.png" alt="Prueba 4" width="950"></div>
     <button onclick="toggleHint(4)">Mostrar pista</button>
     <div id="hint4" class="hint">Aplica propiedades y cambio de base.</div>
 
@@ -191,7 +191,7 @@
 <div id="screen6" class="screen">
   <div class="container" style="text-align:center;">
     <h2>INTRODUCE EL CÓDIGO</h2>
-    <div class="media-placeholder"><img src="./resources/candado.png" alt="Candado" width="975"></div>
+    <div class="media-placeholder"><img src="./resources/candado.png" alt="Candado" width="950"></div>
     <p><strong>Instrucciones:</strong> El código de desbloqueo se obtiene con las soluciones de las pruebas anteriores. Calcula el resultado final de cada prueba, toma el valor numérico simplificado y usa una cifra de cada resultado (por ejemplo, la unidad o un dígito significativo) en orden de las pruebas 1 a 4 para formar el código de 4 dígitos, en concreto:
     <br>1) De la primera prueba tomamos la parte entera al transformar la fracción a decimal.
     <br>2) De la segunda prueba tomamos la suma de numerador  y denominador en su expresión de fracción irreducible.
@@ -208,7 +208,7 @@
   <div class="container" style="text-align:center;">
     <h1>MISIÓN COMPLETADA</h1>
     <p>Skynet ha sido desactivado.</p>
-    <div class="media-placeholder"><img src="./resources/exito.png" alt="Éxito" width="975"></div>
+    <div class="media-placeholder"><img src="./resources/exito.png" alt="Éxito" width="950"></div>
     <div class="media-placeholder">VÍDEO FINAL</div>
   </div>
 </div>
@@ -218,7 +218,7 @@
   <div class="container" style="text-align:center;">
     <h1>FALLO DEL SISTEMA</h1>
     <p>Skynet ha iniciado el Juicio Final.</p>
-    <div class="media-placeholder"><img src="./resources/fracaso.png" alt="Fracaso" width="975"></div>
+    <div class="media-placeholder"><img src="./resources/fracaso.png" alt="Fracaso" width="950"></div>
     <div class="media-placeholder">VÍDEO FINAL</div>
     <button onclick="restartGame()">VOLVER A INTENTAR</button>
   </div>
@@ -267,6 +267,7 @@ function checkCode() {
   const code = document.getElementById('codeInput').value;
   clearInterval(timerInterval);
   if (code === correctCode) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById('success').classList.add('active');
     playSound('successSound');
   } else {

@@ -192,7 +192,11 @@
   <div class="container" style="text-align:center;">
     <h2>INTRODUCE EL CÓDIGO</h2>
     <div class="media-placeholder"><img src="./resources/candado.png" alt="Candado" width="975"></div>
-    <p><strong>Instrucciones:</strong> El código de desbloqueo se obtiene con las soluciones de las pruebas anteriores. Calcula el resultado final de cada prueba, toma el valor numérico simplificado y usa una cifra de cada resultado (por ejemplo, la unidad o un dígito significativo) en orden de las pruebas 1 a 4 para formar el código de 4 dígitos.</p>
+    <p><strong>Instrucciones:</strong> El código de desbloqueo se obtiene con las soluciones de las pruebas anteriores. Calcula el resultado final de cada prueba, toma el valor numérico simplificado y usa una cifra de cada resultado (por ejemplo, la unidad o un dígito significativo) en orden de las pruebas 1 a 4 para formar el código de 4 dígitos, en concreto:
+    <br>1) De la primera prueba tomamos la parte entera al transformar la fracción a decimal.
+    <br>2) De la segunda prueba tomamos la suma de numerador  y denominador en su expresión de fracción irreducible.
+    <br>3) De la tercera prueba tomamos direcamente el resultado.
+    <br>4) De la cuarta prueba tomamos el dígito de las unidades de la parte entera del número.</p>
     <input type="text" id="codeInput" maxlength="4" placeholder="####" />
     <br />
     <button onclick="checkCode()">DESBLOQUEAR</button>
@@ -223,7 +227,7 @@
 <script>
 let timeLeft = 3600; // 60 minutos
 let timerInterval;
-const correctCode = "1234";
+const correctCode = "1954";
 
 function startGame() {
   nextScreen(2);

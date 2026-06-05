@@ -82,6 +82,8 @@
 
     .hint { display: none; color: #fff; margin-top: 10px; }
 
+    #teacherPanel{ position:fixed; bottom:0; left:0; background:rgba(0,0,0,0.97); color:#00ff9c; border-top:2px solid #ff003c; border-right:2px solid #ff003c; padding:14px; font-size:14px; font-family:"Orbitron", Arial, sans-serif; display:none; z-index:9999; text-align:left; box-shadow:0 0 20px #ff003c; max-width:320px; }
+
     /* Responsive */
     @media (max-width: 600px) {
       body { font-size: 14px; }
@@ -111,6 +113,7 @@
     <div class="media-placeholder"><iframe width="560" height="315" src="https://www.youtube.com/embed/0vrj9V-vYZc?si=TJo5i2dPHDtWEPEH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 
     <button onclick="startGame()">INICIAR MISIÓN</button>
+    <hr> <p style="font-size:0.9rem; opacity:0.8; color:#00ff9c;"> 🔓 Acceso de la Resistencia </p> <input type="password" id="teacherPass" placeholder="Código de la Resistencia"> <p style="font-size:0.8rem; opacity:0.6; color:#00ff9c;"> Solo John Connor y la Resistencia conocen el protocolo. </p> <hr>
      <p>Autor: Joaquín Candañedo.<br><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="./resources/CC_BY_SA.png" alt="Creative Commons Reconocimiento - Compartir Igual"></a></p>
  </div>
 </div>
@@ -225,10 +228,14 @@
   </div>
 </div>
 
+<div id="teacherPanel"> <h3>🖥️ TERMINAL DE LA RESISTENCIA</h3> <b>Prueba 1</b><br> Resultado decimal → 1 <br><br> <b>Prueba 2</b><br> Fracción irreducible → 4/5<br> 4 + 5 = 9 <br><br> <b>Prueba 3</b><br> Resultado → 5 <br><br> <b>Prueba 4</b><br> Resultado entero → 14<br> Unidad → 4 <br><br> <hr> 🔐 <b>Código final</b><br><br> 1954 </div>
+  
 <script>
 let timeLeft = 3600; // 60 minutos
 let timerInterval;
 const correctCode = "1954";
+
+document.addEventListener("DOMContentLoaded", () => { document.getElementById("teacherPass") .addEventListener("input", function () { const panel = document.getElementById("teacherPanel"); if (this.value === "SKYNET") { panel.style.display = "block"; } else { panel.style.display = "none"; } }); });
 
 function startGame() {
   nextScreen(2);
